@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title> Attrapez la PASTEQUE </title>
+    <!--REQUIRED STYLE SHEETS-->
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLE CSS -->
+    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+    <!--ANIMATED FONTAWESOME STYLE CSS -->
+    <link href="assets/css/font-awesome-animation.css" rel="stylesheet" />
+       <!-- CUSTOM STYLE CSS -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <link href="site.css" rel="stylesheet">
+    <style>
+.ui-autocomplete { height: 200px; overflow-y: scroll; overflow-x: hidden;}
+
+
+#nation_menu {
+    width: 600px;
+    height:  600px;
+    margin: 30px;
+    margin-left: 350px;
+    border: 1px solid grey;
+  }
+
+span.simulator_head {
+    padding: 80px;
+    height:  0px;
+}
+
+
+#team1 {
+	position: relative;
+	height:300px; //700px;
+  	width:30%; //400px;
+	top: 0%;
+	float:left;
+
+}
+
+#field {
+	height:100%; //700px;
+  	width:40%; //1300px;
+	margin-top: 0px;
+  margin-bottom: 40px;
+
+	float:left;
+	background-image: url(rugbyfield.png);
+	background-size: 100% 100%;
+	max-width:100%;
+	position: relative;
+}
+
+#submitContain {
+	position:absolute;
+	bottom:-10px;
+	left:37.5%;
+	width:25%;
+	height:0.5%;
+}
+
+#team2 {
+	position: relative;
+	height:300px; //700px;
+  	width:30%; //400px;
+	float:left;
+	top: 0%;
+}
+
+
+select.menu {
+    padding: 20px;
+    text-align:center;
+    margin:  40px;
+}
+
+div.overlay_image {
+    position:absolute;
+    width: 30px;
+    height: 30px;
+    background-size: 100% 100%;
+    z-index:1;
+}
+
+/*
+<!--
+div.overlay_image {
+    position:absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    background: #ffffff;
+    border-style: solid;
+    border-color: red;
+    z-index:1;
+}
+-->*/
+
+#results_screen {
+    -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+    position:absolute;
+    width: 120%;
+    height: 75%;
+    //background: #000000;
+    bottom:10%;
+    left:-10%;
+    z-index:2;
+}
+
+#demo {
+    position:absolute;
+    bottom:62%;
+    left:15%;
+    width:80%;
+    height:6%;
+	padding:10px;
+	opacity: 0.6;
+}
+
+
+.main-container {
+    background: #fff none repeat scroll 0 0;
+    clear: both;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    width: 2400px;
+    height:650px;
+}
+
+input.ply {
+	margin:0;
+	height:100%;
+	width: 100%;
+	border: none;
+	border-color: transparent;
+}
+
+td {
+	text-align: left;
+	padding:0;
+	width: 50%;
+}
+
+select {
+	width: 100%;
+	height: 100%;
+	margin:0;
+	padding:0;
+	border: none;
+	border-color: transparent;
+	-moz-appearance: none;
+    	text-indent: 1px;
+    	text-overflow: '';
+      text-align: center;
+}
+
+</style>
+</head>
+<body >
+       <!-- NAV SECTION -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">RUGBY FEMININ</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#accueil-sec">ACCUEIL</a></li>
+                    <li><a href="#cliches-sec">CLICHES</a></li>
+                    <li><a href="#toulouse-sec">EN CLUB</a></li>
+                    <li><a href="#graphs-sec">STATISTIQUES</a></li>
+                    <li><a href="#Licenciées-sec">LICENCIEES EN FRANCE</a></li>
+                    <li><a href="#simulator-sec">SIMULATEUR</a></li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+     <!--END NAV SECTION -->
+
+    <!--HOME SECTION-->
+    <div id="accueil-sec">
+
+
+    <div class="container" id="home" >
+        <div class="row text-center g-pad-bottom">
+            <div class="col-md-12">
+
+                <span class="head-main">LE RUGBY FEMININ</span>
+            </div>
+        </div>
+        <div class="row text-center">
+
+             <div class="col-md-12">
+               <br> </br>
+               <br> </br>
+               <br> </br>
+
+                            <h4>Clichés et vérités </h4>
+                            <p>
+                                En graphes et en images !
+                            </p>
+
+                </div>
+            </div>
+
+    </div>
+         </div>
+
+    <!--END HOME SECTION-->
+    <!--SERVICES SECTION-->
+    <section  id="cliches-sec" >
+        <div class="container">
+
+            <div class="row ">
+                <div class="col-md-12">
+                      <div class="col-md-7 col-sm-7">
+                          <h2>Il existe énormément de stéréotypes...</h2>
+            <img src="assets/img/rugby3.PNG" alt="google search" style="width:500px;height:60px;">
+
+                    <!-- <p>
+Lorem ipsum dolor sit amet, accumsan.  posuere lectus et, fringilla augue.
+                        Lorem ipsum dolor sit amet, accumsan.  posuere lectus et, fringilla augue.
+                          Lorem ipsum dolor sit amet, accumsan.  posuere lectus et, fringilla augue.
+                          Lorem ipsum dolor sit amet, accumsan.  posuere lectus et, fringilla augue.
+                          Lorem ipsum dolor sit amet, accumsan.  posuere lectus et, fringilla augue.
+                    </p> -->
+                    </div>
+
+                    <div class="col-md-4 col-sm-4">
+                    <h2>Vraiment beaucoup !  </h2>
+                    <img src="assets/img/rugby2.PNG" alt="google search" style="width:450px;height:80px;">
+
+
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row text-center">
+
+              <h2>L'intérêt pour le rugby féminin n'est pas que purement sportif...  </h2>
+              <p>Ce graphique montre l'évolution du nombre de recherches google pour "naked women rugby" et "women rugby results" :</p>
+            <script type="text/javascript" src="//www.google.com/trends/embed.js?hl=en-US&q=naked+women+rugby,+results+women+rugby&cmpt=q&tz=Etc/GMT-1&tz=Etc/GMT-1&content=1&cid=TIMESERIES_GRAPH_0&export=5&w=500&h=330"></script>
+            </div>
+            <source style="margin-left:-7%">     <a href="https://www.google.fr/webhp?hl=en"> Source : Google</a>  </source>
+
+    </section>
+
+    <!--END SERVICES SECTION-->
+     <!--STATS SECTION-->
+    <section class="c-sts" id="sts-img">
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-9 ">
+                    <div class="stats-div">
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 ">
+                    <div class="stats-div">
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!--END STATS SECTION-->
+ <!--TOULOUSE SECTION-->
+
+    <section  id="toulouse-sec" >
+            <div class="row text-center">
+          <h2> Même les clubs tombent parfois dans les clichés... </h2>
+            <div class="col-md-4  col-sm-4">
+                  <a href="http://www.stadetoulousainfeminin.com/fr/detail-membre/14/" target="_blank"><img src="assets/img/sansus.PNG"  style="width:230px;height:300px;"></a>
+                     <p> Laure Sansus </p>
+                </div>
+             <div class="col-md-4  col-sm-4">
+                <p> Clique sur les photos des deux demis de mêlée du Stade Toulousain et découvre les "statistiques" que l'on donne sur chacun.</p>
+                <p>    (Découvre aussi la femme en sous-vêtements qui orne toutes les pages du site de l'équipe féminine ! C'est bien connu, c'est pratique de jouer en culotte !)</p>
+                </div>
+            <div class="col-md-4  col-sm-4">
+                <a href="http://www.stadetoulousain.fr/equipe-pro/effectifs/247/sebastien-bezy" target="_blank"><img src="assets/img/bezy.PNG"  style="width:230px;height:300px;"></a>
+                <p> Sebastien Bézy </p>
+                </div>
+            </div>
+
+
+    </section>
+    <!--END TOULOUSE SECTION-->
+    <!--STATS SECTION-->
+   <section class="c-sts" id="sts-img">
+       <div class="container">
+           <div class="row ">
+               <div class="col-md-9 ">
+                   <div class="stats-div">
+
+                   </div>
+               </div>
+
+
+               <div class="col-md-3 ">
+                   <div class="stats-div">
+                   </div>
+
+               </div>
+
+
+           </div>
+       </div>
+   </section>
+   <!--END STATS SECTION-->
+    <!--GRAPHS SECTION-->
+    <!--GRAPHS SECTION-->
+       <section id="graphs-sec">
+           <div class="container">
+               <div style="text-align: center;">
+              <h2> Pourtant, dans un match féminin, il n'y a ni moins d'essais, ni plus de fautes ! </h2>
+               <br>
+             </div>
+               <div style="text-align: justify;">
+
+               <div class="col-md-6 col-sm-6">
+                        <script id="infogram_0_nombre_moyen_dessais_par_match" title="Nombre moyen d'essais par match" src="//e.infogr.am/js/embed.js?skI" type="text/javascript"></script><div style="padding:8px 0;font-family:Arial!important;font-size:13px!important;line-height:15px!important;text-align:center;border-top:1px solid #dadada;margin:0 30px"><a target="_blank" href="https://infogr.am/nombre_moyen_dessais_par_match" style="color:#989898!important;text-decoration:none!important;">Nombre moyen d'essais par match</a><br><a style="color:#989898!important;text-decoration:none!important;" href="http://charts.infogr.am/bar-chart?utm_source=embed_bottom&utm_medium=seo&utm_campaign=bar_chart" target="_blank">Create bar charts</a></div>
+
+                              <p> Parmi les équipes masculines et féminines du tournoi des 6 nations, ainsi que l'équipe masculine de Nouvelle-Zélande et d'Australie, les plus gros marqueurs d'essais ne sont pas ceux que l'on croit..
+                         Et l'on compte deux équipes féminines dans le top 5, Avec l'Angleterre féminine en tête et son score impressionnant de 5,6 essais par match !   </p>
+                  </p>
+
+                                 </div>
+
+
+                      <div class="col-md-6 col-sm-6">
+
+                        <script id="infogram_0_nombre_moyen_de_cartons_et_penalites_par_match" title="Nombre moyen de cartons et pénalités par match" src="//e.infogr.am/js/embed.js?8kl" type="text/javascript"></script><div style="padding:8px 0;font-family:Arial!important;font-size:13px!important;line-height:15px!important;text-align:center;border-top:1px solid #dadada;margin:0 30px"><a target="_blank" href="https://infogr.am/nombre_moyen_de_cartons_et_penalites_par_match" style="color:#989898!important;text-decoration:none!important;">Nombre moyen de cartons et pénalités par match</a><br><a style="color:#989898!important;text-decoration:none!important;" href="http://charts.infogr.am/bar-chart?utm_source=embed_bottom&utm_medium=seo&utm_campaign=bar_chart" target="_blank">Create bar charts</a></div>
+                        <br> </br>
+                        <p> Tu penses que les filles font plus de fautes ? C'est plutôt l'inverse si l'on en
+                            croit les statistiques sur le nombre moyen de cartons et de pénalités par match !
+                            Sur l'ensemble des équipes nommées ci-dessus, les hommes prennent un carton rouge
+                            tous les 43 matchs, c'est à dire deux fois plus souvent que les femmes. Même chose pour le nombre de pénalités sifflées
+                            en moyenne par match qui est de 0,7 pour les femmes alors qu'il grimpe à 2,8 pour les hommes. </p>
+
+               </div>
+
+            </div>
+
+
+           </div>
+           <source style="margin-left:1%">  <a href="http://rugby.statbunker.com/"> Source : StatBunker</a>  </source>
+
+       </section>
+       <!-- END GRAPHS SECTION-->
+
+
+   <section class="c-sts" id="sts-img">
+       <div class="container">
+           <div class="row ">
+               <div class="col-md-9 ">
+                   <div class="stats-div">
+
+                   </div>
+               </div>
+
+
+               <div class="col-md-3 ">
+                   <div class="stats-div">
+                   </div>
+
+               </div>
+
+
+           </div>
+       </div>
+
+   </section>
+   <!--END STATS SECTION-->
+
+    <!--CONTACT SECTION-->
+
+    <section  id="Licenciées-sec">
+      <div class="col-md-12 text-center ">
+
+<h2> Tu crois que ton département est à la pointe du rugby féminin ? </h2>
+<p> Découvre le total de licenciés, et les effectifs féminins bruts et en pourcentage. </p>
+<p> Si le Sud Ouest est effectivement la terre du ballon ovale, le rugby au féminin atteint des proportions plus élevées en région Parisienne et dans le Nord. </p>
+</div>
+
+<iframe width="100%" height="520" frameborder="0" src="https://jeannedo.cartodb.com/viz/b18de034-fa6a-11e5-a885-0e3ff518bd15/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+<source style="margin-left:1%"> <a href="https://www.ffr.fr/"> Source : Fédération Française de Rugby </a></source>
+<!--
+<p> Source : Fédération Française de Rugby </p> -->
+         </section>
+   <!-- END GRAPHS SECTION-->
+   <!--STATS SECTION-->
+  <section class="c-sts" id="sts-img">
+      <div class="container">
+          <div class="row ">
+              <div class="col-md-9 ">
+                  <div class="stats-div">
+
+                  </div>
+              </div>
+
+
+              <div class="col-md-3 ">
+                  <div class="stats-div">
+                  </div>
+
+              </div>
+
+
+          </div>
+      </div>
+  </section>
+  <!--END STATS SECTION-->
+    <!--PRICE SECTION-->
+   <section id="simulator-sec">
+       <div class="container">
+           <div class="row ">
+                                <div class="col-md-12 text-center ">
+
+<h2> Et en bonus : Découvre notre simulateur de matchs ! </h2>
+<p> Construis, sélectionne au hasard, ou choisis tes équipes et laisse notre simulateur te dire qui gagnerait ! </p>
+
+		<form action="" id="form_teams"> <!--action="form_proc.php"-->
+		<div class="main-container">
+
+
+	<div id="team1">
+		<div style="padding:0;margin0;width:100%;height:20%;font-size:20px;">
+			<select class="Teams" id="Team-1" name="Team-1" style="text-align:center;">
+        <option value="England" > Hommes Angleterre </option>
+        <option value="France" > Hommes France </option>
+        <option value="Ireland" > Hommes Irlande</option>
+        <option value="Italy" > Hommes Italie </option>
+        <option value="Scotland" > Hommes Ecosse </option>
+        <option value="Wales" > Hommes Pays de Galles </option>
+        <option value="Uruguay" > Hommes Uruguay</option>
+        <option value="Australia" > Hommes Australie</option>
+        <option value="Argentina" > Hommes Argentine</option>
+        <option value="Namibia" > Hommes Namibie</option>
+        <option value="Samoa" > Hommes Samoa</option>
+        <option value="New_Zealand" > Hommes Nouvelle Zélande </option>
+        <option value="England9Women" > Féminines Angleterre </option>
+        <option value="Scotland9Women" > Féminines Ecosse</option>
+        <option value="Italy9Women" > Féminines Italie </option>
+        <option value="France9Women" > Féminines France </option>
+        <option value="Wales9Women" > Féminines Pays de Galles </option>
+        <option value="Ireland9Women" > Féminines Irlande </option>
+					<option value="Random"> Aléatoire </option>
+					<option value="Custom" selected> Construis ton équipe </option>
+			</select>
+		</div>
+		<table style="max-width:50%;">
+
+
+			<tr >
+				<td>Talonneur</td>
+
+  			</tr>
+  			 <tr>
+   			 	<td style="border-bottom-color: #ffffff;"> <input class="ply" id="Hooker_team_1" name="Hooker_team_1" value=""> </td>
+  			</tr>
+		</table>
+		<table style="max-width:100%;">
+			<tr>
+   			 	<td>Pilier Droit</td>
+				<td>Pilier Gauche</td>
+  			</tr>
+			<tr>
+				<td><input class="ply" id="Loosehead-prop_team_1" name="Loosehead-prop_team_1"></td>
+   			 	<td><input class="ply" id="Tighthead-prop_team_1"  name="Tighthead-prop_team_1" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>2ème Ligne</td>
+   			 	<td>2ème Ligne</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Number-4-lock_team_1" name="Number-4-lock_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Number-5-lock_team_1" name="Number-5-lock_team_1" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>3ème Ligne Aile</td>
+   			 	<td>Numéro 8</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Blindside-flanker_team_1" name="Blindside-flanker_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Number-8_team_1" name="Number-8_team_1" value=""></td>
+  			</tr>
+
+
+
+
+			<tr>
+				<td>3ème Ligne Aile</td>
+   			 	<td>Demi de Mélée</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Openside-flanker_team_1" name="Openside-flanker_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Scrum-half_team_1" name="Scrum-half_team_1" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>Demi d'Ouverture</td>
+   			 	<td>Ailier</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Fly-Half_team_1" name="Fly-Half_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Left-wing_team_1" name="Left-wing_team_1" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>Premier Centre</td>
+   			 	<td>Deuxième Centre</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Inside-Centre_team_1" name="Inside-Centre_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Outside-Centre_team_1" name="Outside-Centre_team_1" value=""></td>
+  			</tr>
+
+
+
+
+			<tr>
+				<td>Ailier</td>
+   			 	<td>Arrière</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Right-wing_team_1" name="Right-wing_team_1" value=""> </td>
+   			 	<td><input class="ply" id="Fullback_team_1" name="Fullback_team_1" value=""></td>
+  			</tr>
+		</table>
+		<!--<div> <input id="demo1" name="am_1" value=""> </div>-->
+
+	</div>
+
+	<div id="field">
+		<!--RESULTS  style="left:35%;bottom:47%;"-->
+		<div id="results_screen" style="background-image:url(rugby_italie_angleterre.jpg);background-size: 100% 100%;" hidden>
+
+		</div>
+
+		<div id="demo" style="color: blue;background:#ffffff;z-index:3;transform: translateY(-50%);text-align:center;" hidden> </div>
+
+		<!-- TEAM 1 -->
+   		<div id="Loosehead-prop_team_1_img"   class="overlay_image" style="left:38.5%;bottom:46%;" title="Player 1" hidden></div>
+		<div id="Hooker_team_1_img"           class="overlay_image" style="left:46.5%;bottom:46%;" title="Player 1" hidden></div>
+		<div id="Tighthead-prop_team_1_img"   class="overlay_image" style="left:54.5%;bottom:46%;" title="Player 1" hidden></div>
+
+		<div id="Number-4-lock_team_1_img"    class="overlay_image" style="left:42.5%;bottom:42%;" title="Player 1" hidden></div>
+		<div id="Number-5-lock_team_1_img"    class="overlay_image" style="left:50.5%;bottom:42%;" title="Player 1" hidden></div>
+
+	        <div id="Blindside-flanker_team_1_img" class="overlay_image" style="left:37%;bottom:40.5%;" title="Player 1" hidden></div>
+		<div id="Openside-flanker_team_1_img" class="overlay_image" style="left:56%;bottom:40.5%;" title="Player 1" hidden></div>
+
+		<div id="Number-8_team_1_img"         class="overlay_image" style="left:46.5%;bottom:38.5%;" title="Player 1" hidden></div>
+
+		<div id="Scrum-half_team_1_img"       class="overlay_image" style="left:52.5%;bottom:34.5%;" title="Player 1" hidden></div>
+		<div id="Fly-Half_team_1_img"         class="overlay_image" style="left:58.5%;bottom:30.5%;" title="Player 1" hidden></div>
+		<div id="Inside-Centre_team_1_img"    class="overlay_image" style="left:64.5%;bottom:26.5%;" title="Player 1" hidden></div>
+		<div id="Outside-Centre_team_1_img"   class="overlay_image" style="left:70.5%;bottom:22.5%" title="Player 1" hidden></div>
+
+		<div id="Right-wing_team_1_img"       class="overlay_image" style="left:76.5%;bottom:18.5%;" title="Player 1" hidden></div>
+		<div id="Left-wing_team_1_img"        class="overlay_image" style="left:20%;bottom:17.5%;" title="Player 1" hidden></div>
+		<div id="Fullback_team_1_img"         class="overlay_image" style="left:47%;bottom:15.25%;" title="Player 1" hidden></div>
+
+		<!-- TEAM 2 -->
+
+		<div id="Loosehead-prop_team_2_img"   class="overlay_image" style="left:54.5%;top:44%;" title="Player 1" hidden></div>
+		<div id="Hooker_team_2_img"           class="overlay_image" style="left:46.5%;top:44%;" title="Player 1" hidden></div>
+		<div id="Tighthead-prop_team_2_img"   class="overlay_image" style="left:38.5%;top:44%;" title="Player 1" hidden></div>
+
+		<div id="Number-4-lock_team_2_img"    class="overlay_image" style="left:50.5%;top:41%;" title="Player 1" hidden></div>
+		<div id="Number-5-lock_team_2_img"    class="overlay_image" style="left:42.5%;top:41%;" title="Player 1" hidden></div>
+
+	        <div id="Blindside-flanker_team_2_img" class="overlay_image" style="left:56%;top:39.5%;" title="Player 1" hidden></div>
+		<div id="Openside-flanker_team_2_img" class="overlay_image" style="left:37%;top:39.5%;" title="Player 1" hidden></div>
+
+		<div id="Number-8_team_2_img"         class="overlay_image" style="left:46.5%;top:37.5%;" title="Player 1" hidden></div>
+
+		<div id="Scrum-half_team_2_img"       class="overlay_image" style="left:40.5%;top:33.5%;" title="Player 1" hidden></div>
+		<div id="Fly-Half_team_2_img"         class="overlay_image" style="left:34.5%;top:29.5%;" title="Player 1" hidden></div>
+		<div id="Inside-Centre_team_2_img"    class="overlay_image" style="left:28.5%;top:25.5%;" title="Player 1" hidden></div>
+		<div id="Outside-Centre_team_2_img"   class="overlay_image" style="left:22.5%;top:21.5%" title="Player 1" hidden></div>
+
+		<div id="Right-wing_team_2_img"       class="overlay_image" style="left:16.5%;top:17.5%;" title="Player 1" hidden></div>
+		<div id="Left-wing_team_2_img"        class="overlay_image" style="left:75%;top:16.5%;" title="Player 1" hidden></div>
+		<div id="Fullback_team_2_img"         class="overlay_image" style="left:46%;top:15.25%;" title="Player 1" hidden></div>
+
+		<div id="submitContain">
+ 			<input id="submitbutton" form="form_teams" type="submit" value="Voir le Résultat"/> <!--  form="form_teams"-->
+		</div>
+
+	</div>
+	<div id="team2">
+		<div style="padding:0;margin0;width:100%;height:20%;font-size:20px;">
+			<select class="Teams" id="Team-2" name="Team-2" style="text-align:center;">
+        <option value="England" > Hommes Angleterre </option>
+        <option value="France" > Hommes France </option>
+        <option value="Ireland" > Hommes Irlande</option>
+        <option value="Italy" > Hommes Italie </option>
+        <option value="Scotland" > Hommes Ecosse </option>
+        <option value="Wales" > Hommes Pays de Galles </option>
+        <option value="Uruguay" > Hommes Uruguay</option>
+        <option value="Australia" > Hommes Australie</option>
+        <option value="Argentina" > Hommes Argentine</option>
+        <option value="Namibia" > Hommes Namibie</option>
+        <option value="Samoa" > Hommes Samoa</option>
+        <option value="New_Zealand" > Hommes Nouvelle Zélande </option>
+        <option value="England9Women" > Féminines Angleterre </option>
+        <option value="Scotland9Women" > Féminines Ecosse</option>
+        <option value="Italy9Women" > Féminines Italie </option>
+        <option value="France9Women" > Féminines France </option>
+        <option value="Wales9Women" > Féminines Pays de Galles </option>
+        <option value="Ireland9Women" > Féminines Irlande </option>
+					<option value="Random"> Aléatoire </option>
+					<option value="Custom" selected> Construis ton équipe </option>
+			</select>
+		</div>
+		<table style="max-width:100%;">
+
+
+			<tr >
+				<td style="background-color:#ffffff;border-bottom-color: #ffffff;border-top-color: #ffffff;border-left-color: #ffffff;"></td>
+				<td>Talonneur</td>
+  			</tr>
+  			 <tr>
+				<td style="border-bottom-color: #ffffff;border-top-color: #ffffff;border-left-color: #ffffff;"></td>
+   			 	<td style="border-bottom-color: #ffffff;"> <input class="ply" id="Hooker_team_2" name="Hooker_team_2" value=""> </td>
+  			</tr>
+		</table>
+		<table style="max-width:100%;">
+			<tr>
+   			 	<td>Pilier Droit</td>
+				<td>Pilier Gauche</td>
+  			</tr>
+			<tr>
+				<td><input class="ply" id="Loosehead-prop_team_2" name="Loosehead-prop_team_2"></td>
+   			 	<td><input class="ply" id="Tighthead-prop_team_2"  name="Tighthead-prop_team_2" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>2ème Ligne</td>
+   			 	<td>2ème Ligne</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Number-4-lock_team_2" name="Number-4-lock_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Number-5-lock_team_2" name="Number-5-lock_team_2" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>3ème Ligne Aile</td>
+   			 	<td>Numéro 8</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Blindside-flanker_team_2" name="Blindside-flanker_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Number-8_team_2" name="Number-8_team_2" value=""></td>
+  			</tr>
+
+
+
+
+			<tr>
+				<td>3ème Ligne Aile</td>
+   			 	<td>Demi de Mélée</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Openside-flanker_team_2" name="Openside-flanker_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Scrum-half_team_2" name="Scrum-half_team_2" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>Demi d'Ouverture</td>
+   			 	<td>Ailier</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Fly-Half_team_2" name="Fly-Half_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Left-wing_team_2" name="Left-wing_team_2" value=""></td>
+  			</tr>
+
+
+
+			<tr>
+				<td>Premier Centre</td>
+   			 	<td>Deuxième Centre</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Inside-Centre_team_2" name="Inside-Centre_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Outside-Centre_team_2" name="Outside-Centre_team_2" value=""></td>
+  			</tr>
+
+
+
+
+			<tr>
+				<td>Ailier</td>
+   			 	<td>Arrière</td>
+  			</tr>
+  			 <tr>
+   			 	<td> <input class="ply" id="Right-wing_team_2" name="Right-wing_team_2" value=""> </td>
+   			 	<td><input class="ply" id="Fullback_team_2" name="Fullback_team_2" value=""></td>
+  			</tr>
+		</table>
+		<!--<div> <input id="demo1" name="am_1" value=""> </div>-->
+
+	</div>
+
+</form>
+
+
+
+               </div>
+           </div>
+
+
+       </div>
+  <source style="margin-left:-6%">     <a href="http://rugby.statbunker.com/"> Source : StatBunker</a>  </source>
+
+   </section>
+   <!-- END PRICE SECTION-->
+          <!--STATS SECTION-->
+          <!--STATS SECTION-->
+         <section class="c-sts" id="sts-img">
+             <div class="container">
+                 <div class="row ">
+                   <div class="col-md-12">
+                       <div class="stats-div">
+
+                          <div id='buttons'>
+                              <a href="http://www.facebook.com/sharer.php?u=http://sociosexologie-du-dimanche.github.io/fr&title=Tout%20ce%20que%20vous%20avez%20toujours%20cru%20savoir%20sur%20le%20sexe&summary=Un%20projet%20de%20dataviz%20sur%20la%20sexualite%20des%20Francais" target="_blank">
+                                      <img src="assets/img/facebook.png" alt="Facebook" />
+                              </a>
+
+              <!-- Google+ -->
+                              <a href="https://plus.google.com/share?url=http://sociosexologie-du-dimanche.github.io/fr" target="_blank">
+                                  <img src="assets/img/google.png" alt="Google" />
+                              </a>
+
+              <!-- LinkedIn -->
+                              <a href='https://www.linkedin.com/shareArticle?mini=true&url=http://sociosexologie-du-dimanche.github.io/fr&title=Tout%20ce%20que%20vous%20avez%20toujours%20cru%20savoir%20sur%20le%20sexe&summary=Un%20projet%20de%20dataviz%20sur%20la%20sexualite%20des%20Francais' target='_blank'>
+                                  <img src="assets/img/linkedin.png" alt="LinkedIn" />
+                              </a>
+
+                              <a href="https://twitter.com/share?url=http://sociosexologie-du-dimanche.github.io/fr&amp;text=Une%20infographie%20sur%20la%20sexualite%20des%20francais&amp;hashtags=dataviz" target="_blank">
+                                  <img src="assets/img/twitter.png" alt="Twitter" />
+                              </a>
+
+                              <a href="http://reddit.com/submit?url=http://sociosexologie-du-dimanche.github.io/fr&amp;title=Une%20infographie%20sur%20la%20sexualite%20des%20Francais" target="_blank">
+                                  <img src="assets/img/reddit.png" alt="Reddit" />
+                              </a>
+                          </div>
+                </div>
+
+            </div>
+
+                 </div>
+             </div>
+         </section>
+         <!--END STATS SECTION-->
+    <!--END CONTACT SECTION-->
+
+
+
+    <!--FOOTER SECTION -->
+    <div id="footer">
+        2016 www.attrapezlapasteque.com | Tous droits réservés
+      <br>  Crédits photos : (Aug. 23, 2010 - Source: Bryn Lennon/Getty Images Europe)
+
+    </div>
+    <!-- END FOOTER SECTION -->
+
+    <!-- JAVASCRIPT FILES PLACED AT THE BOTTOM TO REDUCE THE LOADING TIME  -->
+    <!-- CORE JQUERY  -->
+    <script src="assets/plugins/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP CORE SCRIPT   -->
+    <script src="assets/plugins/bootstrap.js"></script>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '230706700616703',
+                xfbml      : true,
+                version    : 'v2.5'
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <div id="fb-root"></div>
+    <script>
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v2.5&appId=230706700616703";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+	<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script async src="//code.jquery.com/ui/1.10.1/jquery-ui.min.js"></script>
+
+	<script type="text/javascript" src="player_list.js"></script>
+</body>
+</html>
